@@ -1,6 +1,7 @@
 const container = document.querySelector('.container');
 const main = document.querySelector('main');
 
+//inclusão das imagens em um array
 const images = [
     'bobrossparrot',
     'explodyparrot',
@@ -11,35 +12,42 @@ const images = [
     'unicornparrot',
 ];
 
+//definição das variáveis usadas 
 let firstCard = null;
 let secondCard = null;
 let moves = 0;
 let matchedPairs = 0;
 let lockBoard = false;
 
+//função de perguntar número de cartas 
 function numCard() {
     let numCards = parseInt(prompt("Digite um número par de cartas (entre 4 e 14):"));
     while (isNaN(numCards) || numCards < 4 || numCards > 14 ||
-        numCards % 2 !== 0) { numCards = parseInt(prompt("Número inválido. Digite um número par de cartas (entre 4 e 14):")); }
+        numCards % 2 !== 0) { numCards = parseInt(prompt("Número inválido. Digite um número par de cartas (entre 4 e 14:"));}
     return numCards;
 }
 
 const numCards = numCard();
 
+//função de criação dos elementos 
 function createElement(tag, className) {
     const element = document.createElement(tag);
     element.className = className;
     return element;
 }
 
+const moveCounter = createElement('div', 'move-counter');
 
+main.appendChild(moveCounter);
+
+//função de revelar as cartas 
 function revealCard(event) {
     if (lockBoard) return;
     const card = event.currentTarget;
 
     if (card === firstCard || card.classList.contains ('reveal-card')) {
         return;
-    }
+    };
     card.classList.add('reveal-card');
     moves++;
     updateMoveCounter();
@@ -47,14 +55,17 @@ function revealCard(event) {
     if (!firstCard) {
         firstCard = card;
         return;
-    }
+    };
 
     secondCard = card;
     checkCard();
+};
+
+function updateMoveCounter() {
+
 }
 
-
-
+//função de criar a carta
 function createCard(image) {
     const card = document.createElement('div');
     card.classList.add('card');
@@ -63,7 +74,7 @@ function createCard(image) {
     front.classList.add('front');
     const imageFront = document.createElement('img');
     imageFront.src = `images/${image}.gif`;
-    imageFront.alt = image;
+    imageFront.alt = 'Carta da frente';
 
     const back = document.createElement('div');
     back.classList.add('back');
@@ -83,6 +94,7 @@ function createCard(image) {
     return card;
 }
 
+// função de checar a carta
 function checkCard() {
     const firstImage = firstCard.getAttribute('data-image');
     const secondImage = secondCard.getAttribute('data-image');
@@ -111,6 +123,7 @@ function resetBoard() {
     lockBoard = false;
 }
 
+//função de inicializar o jogo e embaralhar as cartas
 function loadGame() {
     const selectedImages = images.slice(0, numCards / 2);
     const duplicateImages = [...selectedImages, ...selectedImages];
