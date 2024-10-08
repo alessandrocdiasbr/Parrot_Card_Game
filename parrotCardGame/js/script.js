@@ -23,7 +23,7 @@ let lockBoard = false;
 function numCard() {
     let numCards = parseInt(prompt("Digite um número par de cartas (entre 4 e 14):"));
     while (isNaN(numCards) || numCards < 4 || numCards > 14 ||
-        numCards % 2 !== 0) { numCards = parseInt(prompt("Número inválido. Digite um número par de cartas (entre 4 e 14:"));}
+        numCards % 2 !== 0) { numCards = parseInt(prompt("Digite um número par de cartas (entre 4 e 14):"));}
     return numCards;
 }
 
@@ -105,7 +105,7 @@ function checkCard() {
 
         if (matchedPairs === numCards / 2) {
             setTimeout(() => {
-                alert(`Parabéns! Você venceu em ${moves} jogadas.`);
+                alert(`Parabéns! Você ganhou em${moves} jogadas!`);
             }, 500);
         }
     } else {
