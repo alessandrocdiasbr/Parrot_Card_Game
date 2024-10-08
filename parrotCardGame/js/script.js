@@ -105,3 +105,8 @@ function checkCard() {
         }, 1000);
     }
 }
+
+function resetBoard() {
+    [firstCard, secondCard] = [null, null];
+    lockBoard = false;
+}
