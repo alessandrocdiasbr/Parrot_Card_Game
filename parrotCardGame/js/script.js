@@ -82,3 +82,26 @@ function createCard(image) {
 
     return card;
 }
+
+function checkCard() {
+    const firstImage = firstCard.getAttribute('data-image');
+    const secondImage = secondCard.getAttribute('data-image');
+
+    if (firstImage === secondImage) {
+        matchedPairs++;
+        resetBoard();
+
+        if (matchedPairs === numCards / 2) {
+            setTimeout(() => {
+                alert(`Parabéns! Você venceu em ${moves} jogadas.`);
+            }, 500);
+        }
+    } else {
+        lockBoard = true; 
+        setTimeout(() => {
+            firstCard.classList.remove('reveal-card');
+            secondCard.classList.remove('reveal-card');
+            resetBoard();
+        }, 1000);
+    }
+}
