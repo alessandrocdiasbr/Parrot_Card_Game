@@ -110,3 +110,16 @@ function resetBoard() {
     [firstCard, secondCard] = [null, null];
     lockBoard = false;
 }
+
+function loadGame() {
+    const selectedImages = images.slice(0, numCards / 2);
+    const duplicateImages = [...selectedImages, ...selectedImages];
+    const shuffledArray = duplicateImages.sort(() => Math.random() - 0.5);
+
+    shuffledArray.forEach((image) => {
+        const card = createCard(image);
+        container.appendChild(card);
+    });
+}
+
+loadGame();
