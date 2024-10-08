@@ -31,3 +31,36 @@ function createElement(tag, className) {
     element.className = className;
     return element;
 }
+
+
+
+
+
+
+function createCard(image) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    const front = document.createElement('div');
+    front.classList.add('front');
+    const imageFront = document.createElement('img');
+    imageFront.src = `images/${image}.gif`;
+    imageFront.alt = image;
+
+    const back = document.createElement('div');
+    back.classList.add('back');
+    const imageBack = document.createElement('img');
+    imageBack.src = `images/back.png`;
+    imageBack.alt = 'Carta de trás';
+
+    front.appendChild(imageFront);
+    back.appendChild(imageBack);
+
+    card.appendChild(front);
+    card.appendChild(back);
+
+    card.addEventListener('click', revealCard);
+    card.setAttribute('data-image', image);
+
+    return card;
+}
