@@ -33,7 +33,25 @@ function createElement(tag, className) {
 }
 
 
+function revealCard(event) {
+    if (lockBoard) return;
+    const card = event.currentTarget;
 
+    if (card === firstCard || card.classList.contains ('reveal-card')) {
+        return;
+    }
+    card.classList.add('reveal-card');
+    moves++;
+    updateMoveCounter();
+
+    if (!firstCard) {
+        firstCard = card;
+        return;
+    }
+
+    secondCard = card;
+    checkCard();
+}
 
 
 
